@@ -23,7 +23,7 @@ class LinkedList:
         self.length += 1
         return True
 
-    def pop(self):
+    def pop_v1(self):
         if self.head is None:
             return False
         if self.head is self.tail:
@@ -40,6 +40,32 @@ class LinkedList:
                 return True
             temp = temp.next
         return False
+
+    def pop(self):
+        if self.head is None:
+            return False
+
+        # Can check length as well
+        # if self.length == 0:
+        #   return None
+
+        if self.head is self.tail:
+            temp = self.head
+            self.head = None
+            self.tail = None
+            self.length -= 1
+            return temp
+        pre = self.head
+        temp = self.head
+
+        while temp.next is not None:  # while (temp.next)
+            pre = temp
+            temp = temp.next
+
+        self.tail = pre
+        self.tail.next = None
+        self.length -= 1
+        return temp
 
     def prepend(self, value):
         new_node = Node(value)
@@ -67,7 +93,7 @@ ll1.append(0)
 ll1.pop()
 ll1.pop()
 ll1.pop()
-ll1.pop()
-ll1.pop()
+x = ll1.pop()
+print("x is ",x.value)
 ll1.print_list()
 print(ll1.length)
